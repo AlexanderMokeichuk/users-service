@@ -1,4 +1,4 @@
-import { Controller, Get, Query } from '@nestjs/common';
+import { Controller, Get, Param, ParseIntPipe, Query } from '@nestjs/common';
 import { UserService } from './users.service';
 
 @Controller('users')
@@ -12,4 +12,12 @@ export class UserController {
   ) {
     return this.userService.findUsers(page, limit);
   }
+
+  @Get(':id')
+  async changeHasProblems(
+    @Param('id', ParseIntPipe) id: number,
+  ) {
+    return this.userService.changeHasProblems(id);
+  }
+
 }

@@ -3,8 +3,7 @@ import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
 export class UserService {
-  constructor(private readonly prisma: PrismaService) {
-  }
+  constructor(private readonly prisma: PrismaService) {}
 
   async findUsers(page: number, limit: number) {
     const skip = (page - 1) * limit;
@@ -27,11 +26,11 @@ export class UserService {
     };
   }
 
-  async changeHasProblems(id: number): Promise<{message: string, count: number}> {
+  async changeHasProblems(id: number): Promise<any> {
     const user = await this.prisma.user.findFirst({
       where: {
         id,
-      }
+      },
     });
 
     if (user) {
@@ -41,8 +40,8 @@ export class UserService {
             id: user.id,
           },
           data: {
-           hasProblems: false
-          }
+            hasProblems: false,
+          },
         });
       }
     }
@@ -53,7 +52,7 @@ export class UserService {
 
     return {
       message: 'Number of users with problems',
-      count: count
+      count: count,
     };
   }
 }

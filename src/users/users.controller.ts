@@ -14,10 +14,7 @@ export class UserController {
   }
 
   @Get(':id')
-  async changeHasProblems(
-    @Param('id', ParseIntPipe) id: number,
-  ) {
+  async changeHasProblems(@Param('id', ParseIntPipe) id: number) {
     return this.userService.changeHasProblems(id);
   }
-
 }
